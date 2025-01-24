@@ -9,6 +9,8 @@ function App() {
 // state 할당 --------------------------------------
   const [list, setList] = useState([]);
 
+  let localData = [];
+  localStorage.getItem('data') !== null && (localData = JSON.parse(localStorage.data));
   // ------------------------------------------------
 
   // ------------------------------------------------
@@ -20,11 +22,11 @@ function App() {
       <main className="main-back">
 
         <section className="input-back">
-          <MedalForm list={list} setList={setList} />
+          <MedalForm list={list} setList={setList} localData={localData} />
         </section>
 
         <section className='table-back'>
-          <ResultTable list={list} setList={setList}/>
+          <ResultTable list={list} setList={setList} localData={localData}/>
         </section>
 
       </main>

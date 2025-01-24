@@ -3,13 +3,9 @@ import { useState } from 'react';
 import MedalItem from './FormItem';
 import Button from './Button';
 
-const MedalForm = ({ list, setList }) => {
+const MedalForm = ({ list, setList, localData }) => {
 
-    let localData = [];
-
-    localStorage.getItem('data') !== null && (localData = JSON.parse(localStorage.data));
-
-    let countryArr = localData.map(e => {return e.country;})
+    let countryArr = localData.map(e => {return e.country;});
 // state 할당 -------------------------------------------------------------
     const [country, setCountry] = useState("");
     const [gold, setGold] = useState('');
@@ -25,7 +21,9 @@ const MedalForm = ({ list, setList }) => {
         if (!newList.country.trim() || !newList.gold.trim() || !newList.silver.trim() || !newList.bronze.trim()) {
             alert("모든 항목을 입력하세요!");
             return; 
-        } else if (countryArr.includes(newList.country) === true){
+        }
+        
+        if (countryArr.includes(newList.country) === true){
             alert("이미 저장된 국가입니다.");
             return;
         }
@@ -36,8 +34,10 @@ const MedalForm = ({ list, setList }) => {
             localData.push(newList);
             localStorage.setItem('data', JSON.stringify(localData));
           }
+
+
         setList([...list, newList]);
-        
+
         setCountry('');
         setGold('');
         setSilver('');

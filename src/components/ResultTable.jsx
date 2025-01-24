@@ -3,10 +3,8 @@ import ResultList from './ResultList';
 import Button from './Button';
 import { useState } from 'react';
 
-const ResultTable = ({ setList }) => {
+const ResultTable = ({ setList, localData }) => {
 
-    let localData = [];
-    localStorage.getItem('data') !== null && (localData = JSON.parse(localStorage.data));
     // -----------------------------------------------------------------------
     // sort 리스트 선언 ---------------------------------------------------------
     let goldSortList = [...localData]
@@ -37,7 +35,6 @@ const ResultTable = ({ setList }) => {
             return (<tr><td className='none-list-td' colSpan={6}>랭킹을 등록해주세요!</td></tr>)
         } 
         return sortList(goldSortList);
-
     }
     // -----------------------------------------------------------------------
     // UI 생성 ----------------------------------------------------------------
